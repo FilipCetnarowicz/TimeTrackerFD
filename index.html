@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TimeTrackerFD</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <button id="menu-toggle">≡</button>
+      <nav>
+        <a href="#">Tasks</a>
+        <a href="#">Reports</a>
+        <a href="#">Projects</a>
+        <a href="#">Tags</a>
+        <a href="#">Team</a>
+      </nav>
+    </aside>
+
+    <header class="topbar">
+      <a href="#" id="logo">TimeTrackerFD</a>
+      <!-- ma byc klikalne -->
+      <nav class="topbar-nav">
+        <a href="#">About ℹ️</a>
+        <a href="#">Help ❓</a>
+        <a href="#">Settings ⚙️</a>
+        <!-- przy zminimalizowanym oknie lub na telefonie sama ikona -->
+        <a href="#" id="userinitials">FC</a>
+        <!-- symbol zależny od zalogowanego użytkownika -->
+      </nav>
+    </header>
+
+    <main class="content">
+      <section class="add-task"></section>
+
+      <section>
+        <div id="panel">
+          <input type="text" placeholder="What are you doing now?" />
+          <button id="btnProject">» assign project</button>
+          <button id="btnStartTime">» change start time</button>
+          <span id="timer">00:00:00</span>
+          <button id="btnStartStop">START ▶</button>
+          <!-- po kliknięciu start przycisk zamienia się na czerwony STOP ⏸ -->
+          <!-- w miarę zmniejszania okna zostaje sama ikona ⏸▶ -->
+        </div>
+
+        <div id="board">
+          <div id="boardControls">
+            <button>» timeline view</button>
+            <button>» groups view</button>
+          </div>
+          <div>
+            <div>here will appear your task as soon as you stop it...</div>
+            <button data-action="delete">✖</button>
+            <button data-action="replay">▶</button>
+            <button data-action="split">✂</button>
+            <!-- Continue... - po najechaniu myszą -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>© 2026 TimeTracker</span>
+      <address class="contact">
+        ✉ <a href="mailto:contact@timetracker.com">contact@timetracker.com</a>
+      </address>
+    </footer>
+  </body>
+</html>

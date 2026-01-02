@@ -1,0 +1,211 @@
+/* ==================================================
+   RESET + BAZA
+   ================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* KLUCZOWE: brak poziomego scrolla */
+}
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  color: #222;
+  background: #f4f6f8;
+}
+
+/* ==================================================
+   GŁÓWNY LAYOUT – GRID (STABILNY)
+   ================================================== */
+body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: 50px auto 40px;
+  grid-template-areas:
+    'sidebar topbar'
+    'sidebar content'
+    'sidebar footer';
+  min-height: 100vh;
+}
+
+/* ==================================================
+   SIDEBAR
+   ================================================== */
+.sidebar {
+  grid-area: sidebar;
+  background: #2c3e50;
+  color: white;
+  padding: 10px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.sidebar a:hover {
+  background: #34495e;
+}
+
+#menu-toggle {
+  margin-bottom: 10px;
+}
+
+/* ==================================================
+   TOPBAR
+   ================================================== */
+.topbar {
+  grid-area: topbar;
+  background: white;
+  border-bottom: 1px solid #ddd;
+
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+#logo {
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+}
+
+.topbar-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 14px;
+}
+
+.topbar-nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* ==================================================
+   CONTENT – OD GÓRY, NIE CENTROWANY
+   ================================================== */
+.content {
+  grid-area: content;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column; /* WAŻNE */
+  align-items: stretch; /* pełna szerokość */
+  justify-content: flex-start; /* od góry */
+  gap: 20px;
+}
+
+/* ==================================================
+   PANEL TIMERA
+   ================================================== */
+#panel {
+  display: flex;
+  flex-wrap: wrap; /* brak rozjeżdżania */
+  gap: 10px;
+
+  background: white;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+#panel input {
+  flex: 1 1 250px; /* elastyczny input */
+  padding: 6px;
+}
+
+#timer {
+  font-weight: bold;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ==================================================
+   BOARD
+   ================================================== */
+#board {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#boardControls {
+  display: flex;
+  gap: 10px;
+}
+
+/* ==================================================
+   POJEDYNCZE ZADANIE (KARTA)
+   ================================================== */
+#board > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+}
+
+/* akcje na zadaniu */
+#board button[data-action] {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ==================================================
+   BUTTONS
+   ================================================== */
+button {
+  padding: 6px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ==================================================
+   FOOTER
+   ================================================== */
+footer {
+  grid-area: footer;
+  background: #eee;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+/* ==================================================
+   RESPONSYWNOŚĆ
+   ================================================== */
+@media (max-width: 800px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'topbar'
+      'content'
+      'footer';
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
