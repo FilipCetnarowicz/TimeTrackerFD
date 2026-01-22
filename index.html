@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>TimeTrackerFD</title>
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
@@ -10,15 +11,15 @@
       <button id="menu-toggle">≡</button>
       <nav>
         <a href="#">Tasks</a>
-        <a href="#">Reports</a>
         <a href="#">Projects</a>
         <a href="#">Tags</a>
+        <a href="#">Reports</a>
         <a href="#">Team</a>
       </nav>
     </aside>
 
     <header class="topbar">
-      <a href="#" id="logo">TimeTrackerFD</a>
+      <a href="/index.html" id="logo">TimeTrackerFD</a>
       <!-- ma byc klikalne -->
       <nav class="topbar-nav">
         <a href="#">About ℹ️</a>
@@ -34,35 +35,54 @@
       <section class="add-task"></section>
 
       <section>
+        <script>
+          fetch('/tabs/home.html');
+        </script>
+
         <div id="panel">
-          <input type="text" placeholder="What are you doing now?" />
-          <button id="btnProject">» assign project</button>
-          <button id="btnStartTime">» change start time</button>
+          <input
+            type="text"
+            placeholder="click here to type current activity"
+          />
+
+          <select id="projects" required>
+            <option value="" disabled selected hidden>
+              click here to select corresponding project
+            </option>
+            <option>Test</option>
+          </select>
+
+          <button id="btnStart">▶</button>
+          <button id="btnStop">⏸</button>
           <span id="timer">00:00:00</span>
-          <button id="btnStartStop">START ▶</button>
-          <!-- po kliknięciu start przycisk zamienia się na czerwony STOP ⏸ -->
-          <!-- w miarę zmniejszania okna zostaje sama ikona ⏸▶ -->
+          <!-- po kliknięciu ▶ przycisk zamienia się na czerwony ⏸ -->
         </div>
 
         <div id="board">
           <div id="boardControls">
-            <button>» timeline view</button>
-            <button>» groups view</button>
+            <div id="viewas">
+              <button>» view as timeline</button>
+              <button>» view as groups</button>
+            </div>
+            <button id="summary">summary</button>
           </div>
           <div>
-            <div>here will appear your task as soon as you stop it...</div>
-            <button data-action="delete">✖</button>
-            <button data-action="replay">▶</button>
-            <button data-action="split">✂</button>
+            <button data-action="changetime">01/01/2026 12:01-12:02</button>
+            <button data-action="changetask">
+              here will appear your task as soon as you stop it...
+            </button>
+            <button data-action="continue">▶</button>
             <!-- Continue... - po najechaniu myszą -->
+            <button data-action="delete">✖</button>
+            <button data-action="split">✂</button>
           </div>
         </div>
       </section>
     </main>
     <footer>
-      <span>© 2026 TimeTracker</span>
+      <span>© 2026 TimeTracker by Filip Cetnarowicz & Daniel Jakubas</span>
       <address class="contact">
-        ✉ <a href="mailto:contact@timetracker.com">contact@timetracker.com</a>
+        ✉ <a href="mailto:contact@timetracker.com">contact@timetrackerfd.com</a>
       </address>
     </footer>
   </body>
