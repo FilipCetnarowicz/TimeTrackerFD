@@ -40,10 +40,9 @@
           />
 
           <select id="selectProject" required>
-            <option value="" disabled selected hidden>
-              click here to select corresponding project
+            <option value="" disabled selected>
+              Select a project
             </option>
-            <option>Test</option>
           </select>
 
           <button id="btnStartStop" data-state="stopped">▶</button>
@@ -73,7 +72,23 @@
           </div>
         </div>
       </section>
-      <section data-switch="projects" hidden>projects</section>
+
+      <section data-switch="projects" hidden>
+        <h2>Projects</h2>
+        <label for="projectDropdown">Select a Project:</label>
+        <select id="projectDropdown">
+            <option value="" disabled selected>Select a project</option>
+            <!-- Add project options dynamically here -->
+        </select>
+        <div id="projectDetails">
+            <!-- Project details will be displayed here after selection -->
+        </div>
+        <button id="addProjectButton">Add Project</button>
+        <button id="editProjectButton">Edit Project</button>
+        <button id="deleteProjectButton">Delete Project</button>
+    </section>
+
+      
       <section data-switch="reports" hidden>reports</section>
       <section data-switch="tags" hidden>tags</section>
       <section data-switch="team" hidden>team</section>
