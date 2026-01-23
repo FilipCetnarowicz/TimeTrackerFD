@@ -81,7 +81,7 @@ export function initUI(store) {
     function createHistoryElement(record) {
         const el = document.createElement('div');
         el.className = 'entry';
-        el.id = record.id;
+        el.dataset.id = record.id;
 
         const start = new Date(record.startedAt * 1000);
         const end = new Date(record.endedAt * 1000);
