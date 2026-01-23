@@ -11,7 +11,23 @@ class Store {
         history: [],
     };
 
-    #stateProjects = [];
+    #stateProjects = [
+        {
+            id: crypto.randomUUID(),
+            name: 'Opieka nad Jamnikiem',
+            details: ''
+        },
+        {
+            id: crypto.randomUUID(),
+            name: 'Projekt Strona WWW',
+            details: ''
+        },
+        {
+            id: crypto.randomUUID(),
+            name: 'Kontakt z klientami',
+            details: ''
+        }
+        ];
 
     #subscribers = new Set();
 
