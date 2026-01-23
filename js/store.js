@@ -1,5 +1,6 @@
 const storageKey = 'timeTrackerState';
 
+//store dla Taskow
 class Store {
     ///////////////////////////////////////////////////// variables
     #state = {
@@ -9,6 +10,8 @@ class Store {
         project: null,
         history: [],
     };
+
+    #stateProjects = [];
 
     #subscribers = new Set();
 
@@ -122,7 +125,6 @@ class Store {
             },
             { type: 'taskChanged' },
         );
-    }
 
     //     addShape(type) {
     //         const shape = {
@@ -156,6 +158,94 @@ class Store {
     //         }
     //         return counts;
     //     }
-}
+    }
+///////----------------PROJECTS-----------------///////
 
+    // Save the current state of projects to localStorage
+    saveStateProject() {
+        localStorage.setItem('projects', JSON.stringify(this.#stateProjects));
+    } 
+
+    // Load the state of projects from localStorage
+    loadStateProject() {
+        const savedState = localStorage.getItem('projects');
+        if (savedState) {
+            this.#stateProjects = JSON.parse(savedState);
+            //this.#notify({ type: 'stateLoaded', projects: this.#stateProjects });
+        } else {
+            this.#stateProjects = []; // Initialize with an empty array if no saved state exists
+        }
+    }
+
+    // Set the state of projects
+    #setStateProject(newState, action) {
+        this.#stateProjects = newState; // Update the state with the new projects array
+        this.saveStateProject(); // Save the updated state to localStorage
+        //this.#notify(action); // Notify listeners about the state change
+    }
+
+    // Get the current state of projects
+    getStateProject() {
+        return structuredClone(this.#stateProjects); // Return a deep copy of the projects array
+    }
+    getProjects() {
+        return this.#stateProjects; // Return the array of projects directly
+    }
+    
+    addProject(name) {
+        const project = {
+            id: crypto.randomUUID(),
+            name: name,
+            details: '', // Initialize with empty details
+        };
+    
+        this.#setStateProject(
+            [...this.#stateProjects, project], // Add the new project to the array
+            { type: 'projectAdded', project }
+        );
+    }
+    
+    editProject(id, newName) {
+        const updatedProjects = this.#stateProjects.map((project) => {
+            if (project.id === id) {
+                return { ...project, name: newName }; // Update the project name
+            }
+            return project;
+        });
+    
+        this.#setStateProject(
+            updatedProjects, // Update the array with the modified project
+            { type: 'projectUpdated', id, newName }
+        );
+    }
+    
+    deleteProject(id) {
+        const filteredProjects = this.#stateProjects.filter((project) => project.id !== id);
+    
+        this.#setStateProject(
+            filteredProjects, // Remove the project from the array
+            { type: 'projectDeleted', id }
+        );
+    }
+    
+    getProjectDetails(id) {
+        const project = this.#stateProjects.find((project) => project.id === id);
+        return project ? project.details : null; // Return the details of the project
+    }
+    
+    setProjectDetails(id, details) {
+        const updatedProjects = this.#stateProjects.map((project) => {
+            if (project.id === id) {
+                return { ...project, details: details }; // Update the project details
+            }
+            return project;
+        });
+    
+        this.#setStateProject(
+            updatedProjects, // Update the array with the modified project
+            { type: 'projectDetailsSet', id, details }
+        );
+    }
+
+}
 export const store = new Store();

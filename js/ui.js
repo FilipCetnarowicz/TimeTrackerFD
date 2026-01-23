@@ -53,6 +53,18 @@ export function initUI(store) {
         store.setTask(taskInput.value, projectSelect.value);
     });
 
+    //PROJECTS
+    const projectDropdown = document.getElementById('projectDropdown');
+    const addProjectButton = document.getElementById('addProjectButton');
+    const editProjectButton = document.getElementById('editProjectButton');
+    const deleteProjectButton = document.getElementById('deleteProjectButton');
+    addProjectButton.addEventListener('click', handleAddProject);
+    editProjectButton.addEventListener('click', handleEditProject);
+    deleteProjectButton.addEventListener('click', handleDeleteProject);
+    projectDropdown.addEventListener('focus', handleProjectSelection);
+    
+    projectSelect.addEventListener('focus', handleUpdateProjectDropdownForTasks);
+
     // addSquareBtn.addEventListener('click', () => {
     //     store.addShape('square');
     // });
@@ -139,6 +151,86 @@ export function initUI(store) {
             uiTimerId = null;
         }
     }
+
+    function handleUpdateProjectDropdownForTasks() {
+        const projects = store.getProjects(); // Get the list of projects from the store
+        const projectDropdown = document.getElementById('selectProject');
+        projectDropdown.innerHTML = '<option value="" disabled selected>Select a project</option>';
+        projects.forEach((project) => {
+            const option = document.createElement('option');
+            option.value = project.id; // Use the project ID as the value
+            option.textContent = project.name; // Display the project name
+            projectDropdown.appendChild(option);
+        });
+    }
+////PROJECTS
+function updateProjectDropdown() {
+    const projects = store.getProjects(); // Get the list of projects from the store
+    const projectDropdown = document.getElementById('projectDropdown');
+    projectDropdown.innerHTML = '<option value="" disabled selected>Select a project</option>';
+    projects.forEach((project) => {
+        const option = document.createElement('option');
+        option.value = project.id; // Use the project ID as the value
+        option.textContent = project.name; // Display the project name
+        projectDropdown.appendChild(option);
+    });
+
+    console.log(projects);
+}
+
+function handleAddProject() {
+    const projectName = prompt('Enter the name of the new project:');
+    if (projectName) {
+        store.addProject(projectName); // Add the project to the store
+        updateProjectDropdown(); // Update the dropdown
+    }
+}
+
+function handleEditProject() {
+    const projectDropdown = document.getElementById('projectDropdown');
+    const selectedProjectId = projectDropdown.value; // Get the selected project ID
+    if (!selectedProjectId) {
+        alert('Please select a project to edit.');
+        return;
+    }
+    const selectedProject = store.getProjects().find((project) => project.id === selectedProjectId);
+    const newProjectName = prompt('Enter the new name for the project:', selectedProject.name);
+    if (newProjectName) {
+        store.editProject(selectedProjectId, newProjectName); // Edit the project in the store
+        updateProjectDropdown(); // Update the dropdown
+    }
+}
+
+function handleDeleteProject() {
+    const projectDropdown = document.getElementById('projectDropdown');
+    const selectedProjectId = projectDropdown.value; // Get the selected project ID
+    if (!selectedProjectId) {
+        alert('Please select a project to delete.');
+        return;
+    }
+    const selectedProject = store.getProjects().find((project) => project.id === selectedProjectId);
+    if (confirm(`Are you sure you want to delete the project "${selectedProject.name}"?`)) {
+        store.deleteProject(selectedProjectId); // Delete the project from the store
+        updateProjectDropdown(); // Update the dropdown
+        const projectDetails = document.getElementById('projectDetails');
+        projectDetails.innerHTML = ''; // Clear project details
+    }
+}
+
+function handleProjectSelection() {
+    const projectDropdown = document.getElementById('projectDropdown');
+    const selectedProjectId = projectDropdown.value; // Get the selected project ID
+    const projectDetails = document.getElementById('projectDetails');
+    if (selectedProjectId) {
+        const selectedProject = store.getProjects().find((project) => project.id === selectedProjectId);
+        const details = selectedProject ? selectedProject.details : 'No details available.';
+        projectDetails.innerHTML = `<p>${details}</p>`;
+    } else {
+        projectDetails.innerHTML = '';
+    }
+}
+
+
 
     // function createShapeElement(shape) {
     //     const el = document.createElement('div');
