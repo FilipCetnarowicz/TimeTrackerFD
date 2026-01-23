@@ -5,70 +5,65 @@
     <title>TimeTrackerFD</title>
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <link rel="stylesheet" href="./css/main.css" />
+    <script type="module" src="./js/app.js"></script>
   </head>
   <body>
-    <aside class="sidebar">
-      <button id="menu-toggle">≡</button>
+    <aside>
+      <button id="asideToggle">≡</button>
       <nav>
-        <a href="#">Tasks</a>
-        <a href="#">Projects</a>
-        <a href="#">Tags</a>
-        <a href="#">Reports</a>
-        <a href="#">Team</a>
+        <button data-switch="tasks">Tasks</button>
+        <button data-switch="projects">Projects</button>
+        <button data-switch="reports">Reports</button>
+        <button data-switch="tags">Tags</button>
+        <button data-switch="team">Team</button>
       </nav>
     </aside>
 
-    <header class="topbar">
-      <a href="/index.html" id="logo">TimeTrackerFD</a>
-      <!-- ma byc klikalne -->
-      <nav class="topbar-nav">
-        <a href="#">About ℹ️</a>
-        <a href="#">Help ❓</a>
-        <a href="#">Settings ⚙️</a>
-        <!-- przy zminimalizowanym oknie lub na telefonie sama ikona -->
-        <a href="#" id="userinitials">FC</a>
-        <!-- symbol zależny od zalogowanego użytkownika -->
+    <header>
+      <nav class="headerNav">
+        <button data-switch="tasks">TimeTrackerFD</button>
+        <button data-switch="about">About ℹ️</button>
+        <button data-switch="help">Help ❓</button>
+        <button data-switch="settings">Settings ⚙️</button>
+        <button data-switch="account">Account 👤</button>
+        <!-- zamiast Account można by było dodać inicjały -->
       </nav>
     </header>
 
-    <main class="content">
-      <section class="add-task"></section>
-
-      <section>
-        <script>
-          fetch('/tabs/home.html');
-        </script>
-
+    <main>
+      <section data-switch="tasks">
         <div id="panel">
           <input
+            id="inputTask"
             type="text"
             placeholder="click here to type current activity"
           />
 
-          <select id="projects" required>
+          <select id="selectProject" required>
             <option value="" disabled selected hidden>
               click here to select corresponding project
             </option>
             <option>Test</option>
           </select>
 
-          <button id="btnStart">▶</button>
-          <button id="btnStop">⏸</button>
-          <span id="timer">00:00:00</span>
+          <button id="btnStartStop" data-state="stopped">▶</button>
+          <!-- <button id="btnStop">⏸</button> -->
           <!-- po kliknięciu ▶ przycisk zamienia się na czerwony ⏸ -->
+          <span id="timer">00:00:00</span>
+          <!-- po kliknięciu w czas można zmienić godzinę rozpoczęcia -->
         </div>
 
         <div id="board">
           <div id="boardControls">
-            <div id="viewas">
+            <div id="viewAs">
               <button>» view as timeline</button>
               <button>» view as groups</button>
             </div>
             <button id="summary">summary</button>
           </div>
           <div>
-            <button data-action="changetime">01/01/2026 12:01-12:02</button>
-            <button data-action="changetask">
+            <button data-action="changeTime">01/01/2026 12:01-12:02</button>
+            <button data-action="changeTask">
               here will appear your task as soon as you stop it...
             </button>
             <button data-action="continue">▶</button>
@@ -78,6 +73,14 @@
           </div>
         </div>
       </section>
+      <section data-switch="projects" hidden>projects</section>
+      <section data-switch="reports" hidden>reports</section>
+      <section data-switch="tags" hidden>tags</section>
+      <section data-switch="team" hidden>team</section>
+      <section data-switch="about" hidden>about</section>
+      <section data-switch="help" hidden>help</section>
+      <section data-switch="settings" hidden>settings</section>
+      <section data-switch="account" hidden>account</section>
     </main>
     <footer>
       <span>© 2026 TimeTracker by Filip Cetnarowicz & Daniel Jakubas</span>
