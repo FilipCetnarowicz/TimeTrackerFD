@@ -16,6 +16,7 @@ export function initUI(store) {
 
     let uiTimerId = null;
 
+    
     const taskInput = document.getElementById('inputTask');
     const projectSelect = document.getElementById('selectProject');
 
