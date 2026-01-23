@@ -8,7 +8,24 @@
     <script type="module" src="./js/app.js"></script>
   </head>
   <body>
-    <aside>
+
+    <div id="loginContainer">
+      <h1>Welcome to TimeTrackerFD</h1>
+      <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">Login</button>
+      </form>
+
+    <div id="appContainer" hidden>
+
+
+    
+    <aside hidden>
       <button id="asideToggle">≡</button>
       <nav>
         <button data-switch="tasks">Tasks</button>
@@ -31,7 +48,7 @@
     </header>
 
     <main>
-      <section data-switch="tasks">
+      <section data-switch="tasks" hidden>
         <div id="panel">
           <input
             id="inputTask"
@@ -97,11 +114,16 @@
       <section data-switch="settings" hidden>settings</section>
       <section data-switch="account" hidden>account</section>
     </main>
+
+
+  </div>
     <footer>
       <span>© 2026 TimeTracker by Filip Cetnarowicz & Daniel Jakubas</span>
       <address class="contact">
         ✉ <a href="mailto:contact@timetracker.com">contact@timetrackerfd.com</a>
       </address>
     </footer>
+
+
   </body>
 </html>
