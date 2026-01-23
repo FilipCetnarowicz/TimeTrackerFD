@@ -3,6 +3,7 @@ name: Deploy frontend to Azure Web App
 on:
   push:
     branches:
+      - main
       - danielDev
   workflow_dispatch:
 
