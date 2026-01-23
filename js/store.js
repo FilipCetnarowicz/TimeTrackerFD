@@ -3,6 +3,7 @@ const taskEndpoint = '/task';
 const projectEndpoint = '/project';
 
 //store dla Taskow
+//store dla Taskow
 class Store {
     ///////////////////////////////////////////////////// variables
     #state = {
@@ -12,6 +13,8 @@ class Store {
         project: null,
         history: [],
     };
+
+    #stateProjects = [];
 
     #stateProjects = [
         {
