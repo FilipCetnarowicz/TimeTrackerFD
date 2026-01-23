@@ -19,6 +19,7 @@ export function initUI(store) {
     const taskInput = document.getElementById('inputTask');
     const projectSelect = document.getElementById('selectProject');
 
+
     const asideToggle = document.getElementById('asideToggle');
 
     ///////////////////////////////////////////////////// listeners
