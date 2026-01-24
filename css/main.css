@@ -1,6 +1,5 @@
-/* ==================================================
-   RESET + BAZA
-   ================================================== */
+/* //////////////////////////////////////////////////// BASE */
+
 * {
   box-sizing: border-box;
 }
@@ -10,27 +9,56 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
 body {
-  font-family: system-ui, Arial, sans-serif;
+  font-family: system-ui, sans-serif;
   color: #222;
-  background: #f4f6f8;
+  background: #f6f9ff;
+}
 
+/* //////////////////////////////////////////////////// LAYOUT */
+
+body {
   display: grid;
   grid-template-columns: 220px 1fr;
-  grid-template-rows: 50px auto 40px;
+  grid-template-rows: 50px 1fr 40px;
   grid-template-areas:
     'sidebar topbar'
     'sidebar content'
     'sidebar footer';
-  min-height: 100vh;
 }
 
-/* ==================================================
-   SIDEBAR
-   ================================================== */
+@media (max-width: 800px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'topbar'
+      'content'
+      'footer';
+  }
+
+  aside {
+    display: none;
+  }
+}
+
+/* //////////////////////////////////////////////////// GLOBAL ELEMENTS */
+
+button {
+  padding: 5px;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #3d6d9e;
+}
+
+/* //////////////////////////////////////////////////// SIDEBAR FULL */
+
 aside {
   grid-area: sidebar;
   background: #2c3e50;
@@ -47,9 +75,9 @@ aside nav {
 aside button {
   background: none;
   border: none;
-  color: white;
+  color: inherit;
   text-align: left;
-  padding: 8px 10px;
+  padding: 10px;
   border-radius: 4px;
 }
 
@@ -57,23 +85,18 @@ aside button:hover {
   background: #34495e;
 }
 
-#asideToggle {
-  margin-bottom: 10px;
-}
+/* //////////////////////////////////////////////////// SIDEBAR COLLAPSED */
 
-/* ==================================================
-   ASIDE – COLLAPSED STATE
-   ================================================== */
 body.asideToggleCollapsed {
   grid-template-columns: 48px 1fr;
 }
 
-body.asideToggleCollapsed aside nav {
-  display: none;
-}
-
 body.asideToggleCollapsed aside {
   padding: 10px 4px;
+}
+
+body.asideToggleCollapsed aside nav {
+  display: none;
 }
 
 body.asideToggleCollapsed #asideToggle {
@@ -81,40 +104,50 @@ body.asideToggleCollapsed #asideToggle {
   text-align: center;
 }
 
-/* ==================================================
-   HEADER / TOPBAR
-   ================================================== */
+/* //////////////////////////////////////////////////// HEADER */
+
 header {
   grid-area: topbar;
   background: white;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #b7b7b7;
 
   display: flex;
   align-items: center;
-  padding: 0 16px;
-}
-
-#logo {
-  font-weight: 600;
-  text-decoration: none;
-  color: inherit;
+  padding: 0 1vw;
 }
 
 .headerNav {
-  margin-left: auto;
   display: flex;
+  align-items: center;
   gap: 14px;
+  width: 100%;
+}
+
+#logo {
+  margin-right: auto;
 }
 
 .headerNav button {
   background: none;
   border: none;
-  cursor: pointer;
 }
 
-/* ==================================================
-   MAIN CONTENT
-   ================================================== */
+/* //////////////////////////////////////////////////// FOOTER */
+
+footer {
+  grid-area: footer;
+  background: #eee;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+/* /////////////////////////////////////////////////////////////////////// MAIN CONTENT (SPA CONTAINER) */
+
 main {
   grid-area: content;
   padding: 16px;
@@ -124,9 +157,10 @@ main {
   gap: 20px;
 }
 
-/* ==================================================
-   PANEL TIMERA
-   ================================================== */
+/* //////////////////////////////////////////////////// TASKS */
+
+/* /////////// PANEL */
+
 #panel {
   display: flex;
   flex-wrap: wrap;
@@ -135,9 +169,6 @@ main {
   background: white;
   padding: 12px;
   border: 1px solid #ddd;
-}
-#btnStartStop.running {
-  color: red;
 }
 
 #panel input {
@@ -155,9 +186,12 @@ main {
   text-align: center;
 }
 
-/* ==================================================
-   BOARD
-   ================================================== */
+#btnStartStop.running {
+  color: red;
+}
+
+/* /////////// BOARD */
+
 #board {
   background: white;
   border: 1px solid #ddd;
@@ -186,54 +220,13 @@ main {
   gap: 10px;
 
   padding: 10px;
-  border: 1px solid #ccc;
   background: #fafafa;
+  border: 1px solid #ccc;
 }
 
-/* akcje */
 #board button[data-action] {
   background: none;
   border: none;
-  cursor: pointer;
 }
 
-/* ==================================================
-   BUTTONS – global
-   ================================================== */
-button {
-  padding: 6px 10px;
-  font: inherit;
-  cursor: pointer;
-}
-
-/* ==================================================
-   FOOTER
-   ================================================== */
-footer {
-  grid-area: footer;
-  background: #eee;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 16px;
-  font-size: 14px;
-}
-
-/* ==================================================
-   RESPONSYWNOŚĆ
-   ================================================== */
-@media (max-width: 800px) {
-  body {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'topbar'
-      'content'
-      'footer';
-  }
-
-  aside {
-    display: none;
-  }
-}
+/* //////////////////////////////////////////////////// PROJECTS */

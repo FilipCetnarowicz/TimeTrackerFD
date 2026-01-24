@@ -10,7 +10,7 @@
   <body>
 
     
-    <div id="loginContainer">
+    <div id="loginContainer" hidden>
       <h1>Welcome to TimeTrackerFD</h1>
       <form id="loginForm">
         <label for="username">Username:</label>
@@ -24,7 +24,7 @@
     </div>
 
 
-    <aside hidden>
+    <aside>
       <button id="asideToggle">≡</button>
       <nav>
         <button data-switch="tasks">Tasks</button>
@@ -37,7 +37,7 @@
 
     <header hidden>
       <nav class="headerNav">
-        <button data-switch="tasks">TimeTrackerFD</button>
+        <button data-switch="tasks" id="logo">TimeTrackerFD</button>
         <button data-switch="about">About ℹ️</button>
         <button data-switch="help">Help ❓</button>
         <button data-switch="settings">Settings ⚙️</button>
