@@ -107,9 +107,7 @@ class Store {
             startedAt: this.#state.startedAt,
             endedAt: Math.floor(Date.now() / 1000),
             task: this.#state.task,
-            project:
-                this.#stateProjects.find((p) => p.id === this.#state.project)
-                    ?.name || '',
+            project: this.#state.project,
         };
 
         this.#setState(
@@ -144,7 +142,6 @@ class Store {
             { type: 'taskChanged' },
         );
     }
-
     continueRecord(id) {
         const record = this.#state.history.find((r) => r.id === id);
         if (!record) return;

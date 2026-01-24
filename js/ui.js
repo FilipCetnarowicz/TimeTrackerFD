@@ -117,7 +117,7 @@ export function initUI(store) {
             ${record.task || '—'}
         </button>
         <button data-action="changeProject">
-            ${record.project || '—'}
+            ${store.getProjects().find((p) => p.id === record.project)?.name || '—'}
         </button>
         <button data-action="continue">▶</button>
         <button data-action="delete">✖</button>
