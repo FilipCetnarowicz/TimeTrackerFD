@@ -40,6 +40,10 @@ export function initUI(store) {
         const entry = btn.closest('.entry');
         if (!entry) return;
 
+        if (btn.dataset.action === 'continue') {
+            store.continueRecord(entry.dataset.id);
+            return;
+        }
         if (btn.dataset.action === 'delete') {
             store.deleteRecord(entry.dataset.id);
         }
@@ -316,13 +320,17 @@ export function initUI(store) {
         timerStarted: (state) => {
             renderStartStop(true);
             startUITimer(state.startedAt);
+            taskInput.value = state.task || '';
+            projectSelect.value = state.project || '';
         },
 
-        timerStopped: (_, action) => {
+        timerStopped: (state, action) => {
             renderStartStop(false);
             stopUITimer();
             renderTimer(0);
             addHistoryElement(action.record);
+            taskInput.value = state.task || '';
+            projectSelect.value = state.project || '';
         },
 
         recordDeleted: (_, action) => {

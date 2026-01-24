@@ -15,19 +15,19 @@ class Store {
         {
             id: crypto.randomUUID(),
             name: 'Opieka nad Jamnikiem',
-            details: ''
+            details: '',
         },
         {
             id: crypto.randomUUID(),
             name: 'Projekt Strona WWW',
-            details: ''
+            details: '',
         },
         {
             id: crypto.randomUUID(),
             name: 'Kontakt z klientami',
-            details: ''
-        }
-        ];
+            details: '',
+        },
+    ];
 
     #subscribers = new Set();
 
@@ -107,7 +107,9 @@ class Store {
             startedAt: this.#state.startedAt,
             endedAt: Math.floor(Date.now() / 1000),
             task: this.#state.task,
-            project: this.#state.project,
+            project:
+                this.#stateProjects.find((p) => p.id === this.#state.project)
+                    ?.name || '',
         };
 
         this.#setState(
@@ -141,6 +143,27 @@ class Store {
             },
             { type: 'taskChanged' },
         );
+    }
+
+    continueRecord(id) {
+        const record = this.#state.history.find((r) => r.id === id);
+        if (!record) return;
+
+        if (this.#state.isRunning) {
+            this.stopTimer();
+        }
+
+        this.#setState(
+            {
+                ...this.#state,
+                isRunning: true,
+                startedAt: Math.floor(Date.now() / 1000),
+                task: record.task,
+                project: record.project,
+            },
+            { type: 'timerStarted' },
+        );
+    }
 
     //     addShape(type) {
     //         const shape = {
@@ -174,13 +197,12 @@ class Store {
     //         }
     //         return counts;
     //     }
-    }
-///////----------------PROJECTS-----------------///////
+    ///////----------------PROJECTS-----------------///////
 
     // Save the current state of projects to localStorage
     saveStateProject() {
         localStorage.setItem('projects', JSON.stringify(this.#stateProjects));
-    } 
+    }
 
     // Load the state of projects from localStorage
     loadStateProject() {
@@ -207,20 +229,20 @@ class Store {
     getProjects() {
         return this.#stateProjects; // Return the array of projects directly
     }
-    
+
     addProject(name) {
         const project = {
             id: crypto.randomUUID(),
             name: name,
             details: '', // Initialize with empty details
         };
-    
+
         this.#setStateProject(
             [...this.#stateProjects, project], // Add the new project to the array
-            { type: 'projectAdded', project }
+            { type: 'projectAdded', project },
         );
     }
-    
+
     editProject(id, newName) {
         const updatedProjects = this.#stateProjects.map((project) => {
             if (project.id === id) {
@@ -228,27 +250,31 @@ class Store {
             }
             return project;
         });
-    
+
         this.#setStateProject(
             updatedProjects, // Update the array with the modified project
-            { type: 'projectUpdated', id, newName }
+            { type: 'projectUpdated', id, newName },
         );
     }
-    
+
     deleteProject(id) {
-        const filteredProjects = this.#stateProjects.filter((project) => project.id !== id);
-    
+        const filteredProjects = this.#stateProjects.filter(
+            (project) => project.id !== id,
+        );
+
         this.#setStateProject(
             filteredProjects, // Remove the project from the array
-            { type: 'projectDeleted', id }
+            { type: 'projectDeleted', id },
         );
     }
-    
+
     getProjectDetails(id) {
-        const project = this.#stateProjects.find((project) => project.id === id);
+        const project = this.#stateProjects.find(
+            (project) => project.id === id,
+        );
         return project ? project.details : null; // Return the details of the project
     }
-    
+
     setProjectDetails(id, details) {
         const updatedProjects = this.#stateProjects.map((project) => {
             if (project.id === id) {
@@ -256,12 +282,11 @@ class Store {
             }
             return project;
         });
-    
+
         this.#setStateProject(
             updatedProjects, // Update the array with the modified project
-            { type: 'projectDetailsSet', id, details }
+            { type: 'projectDetailsSet', id, details },
         );
     }
-
 }
 export const store = new Store();
