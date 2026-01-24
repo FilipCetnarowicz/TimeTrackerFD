@@ -9,7 +9,7 @@
   </head>
   <body>
     <aside>
-      <button id="asideToggle">≡</button>
+      <button id="asideToggle">hide/show</button>
       <nav>
         <button data-switch="tasks">Tasks</button>
         <button data-switch="projects">Projects</button>
@@ -31,7 +31,7 @@
     </header>
 
     <main>
-      <section data-switch="tasks">
+      <section class="sideTabs" data-switch="tasks">
         <div id="panel">
           <input
             id="inputTask"
@@ -40,9 +40,7 @@
           />
 
           <select id="selectProject" required>
-            <option value="" disabled selected>
-              Select a project
-            </option>
+            <option value="" disabled selected>Select a project</option>
           </select>
 
           <button id="btnStartStop" data-state="stopped">▶</button>
@@ -73,29 +71,30 @@
         </div>
       </section>
 
-      <section data-switch="projects" hidden>
+      <section class="sideTabs" data-switch="projects" hidden>
         <h2>Projects</h2>
         <label for="projectDropdown">Select a Project:</label>
         <select id="projectDropdown">
-            <option value="" disabled selected>Select a project</option>
-            <!-- Add project options dynamically here -->
+          <option value="" disabled selected>Select a project</option>
+          <!-- Add project options dynamically here -->
         </select>
         <div id="projectDetails">
-            <!-- Project details will be displayed here after selection -->
+          <!-- Project details will be displayed here after selection -->
         </div>
         <button id="addProjectButton">Add Project</button>
         <button id="editProjectButton">Edit Project</button>
         <button id="deleteProjectButton">Delete Project</button>
-    </section>
+      </section>
 
-      
-      <section data-switch="reports" hidden>reports</section>
-      <section data-switch="tags" hidden>tags</section>
-      <section data-switch="team" hidden>team</section>
-      <section data-switch="about" hidden>about</section>
-      <section data-switch="help" hidden>help</section>
-      <section data-switch="settings" hidden>settings</section>
-      <section data-switch="account" hidden>account</section>
+      <section class="sideTabs" data-switch="reports" hidden>reports</section>
+      <section class="sideTabs" data-switch="tags" hidden>tags</section>
+      <section class="sideTabs" data-switch="team" hidden>team</section>
+      <section class="headerTabs" data-switch="about" hidden>about</section>
+      <section class="headerTabs" data-switch="help" hidden>help</section>
+      <section class="headerTabs" data-switch="settings" hidden>
+        settings
+      </section>
+      <section class="headerTabs" data-switch="account" hidden>account</section>
     </main>
     <footer>
       <span>© 2026 TimeTracker by Filip Cetnarowicz & Daniel Jakubas</span>

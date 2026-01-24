@@ -31,30 +31,16 @@ body {
     'sidebar footer';
 }
 
-@media (max-width: 800px) {
-  body {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'topbar'
-      'content'
-      'footer';
-  }
-
-  aside {
-    display: none;
-  }
-}
-
 /* //////////////////////////////////////////////////// GLOBAL ELEMENTS */
 
 button {
   padding: 5px;
   font: inherit;
   cursor: pointer;
-}
 
-button:hover {
-  background: #3d6d9e;
+  &:hover {
+    background: #3d6d9e;
+  }
 }
 
 /* //////////////////////////////////////////////////// SIDEBAR FULL */
@@ -64,86 +50,143 @@ aside {
   background: #2c3e50;
   color: white;
   padding: 10px;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    button {
+      padding-right: 4vw;
+    }
+
+    gap: 4px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: inherit;
+    text-align: left;
+    padding: 10px;
+
+    border-radius: 4px;
+
+    &:hover {
+      background: #34495e;
+    }
+  }
 }
 
-aside nav {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-aside button {
-  background: none;
-  border: none;
-  color: inherit;
-  text-align: left;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-aside button:hover {
-  background: #34495e;
-}
-
-/* //////////////////////////////////////////////////// SIDEBAR COLLAPSED */
-
-body.asideToggleCollapsed {
-  grid-template-columns: 48px 1fr;
-}
-
-body.asideToggleCollapsed aside {
-  padding: 10px 4px;
-}
-
-body.asideToggleCollapsed aside nav {
-  display: none;
-}
-
-body.asideToggleCollapsed #asideToggle {
+#asideToggle {
   width: 100%;
-  text-align: center;
+  text-align: center; /* collapsed */
+  font-size: 18px;
+  font-weight: 700;
+}
+
+body:not(.aside-collapsed) {
+  #asideToggle {
+    text-align: right; /* expanded */
+    padding-right: 8px;
+  }
+}
+
+body {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+
+  aside {
+    nav {
+      display: flex;
+    }
+  }
+}
+
+body.aside-collapsed {
+  grid-template-columns: 48px 1fr;
+
+  aside {
+    grid-template-columns: 48px 1fr;
+    padding-left: 0;
+    padding-right: 0;
+
+    nav {
+      display: none;
+    }
+  }
 }
 
 /* //////////////////////////////////////////////////// HEADER */
 
 header {
   grid-area: topbar;
-  background: white;
-  border-bottom: 1px solid #b7b7b7;
+  background: #f2f2f2;
+  border-bottom: 1px solid #cfcfcf;
 
   display: flex;
   align-items: center;
   padding: 0 1vw;
-}
 
-.headerNav {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-}
+  .headerNav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 
-#logo {
-  margin-right: auto;
-}
+    button {
+      border: none;
+      background: transparent;
+      color: #222;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+    }
 
-.headerNav button {
-  background: none;
-  border: none;
+    button:not(#logo):hover {
+      background: #2c3e50;
+      color: white;
+    }
+  }
+
+  #logo {
+    margin-right: auto;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+    background: none;
+  }
 }
 
 /* //////////////////////////////////////////////////// FOOTER */
 
 footer {
   grid-area: footer;
-  background: #eee;
+  background: #f2f4f7;
+  border-top: 1px solid #cfcfcf;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 0 16px;
-  font-size: 14px;
+  font-size: 13px;
+  color: #555;
+
+  .contact {
+    font-style: normal;
+  }
+
+  a {
+    color: #3d6d9e;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 /* /////////////////////////////////////////////////////////////////////// MAIN CONTENT (SPA CONTAINER) */
@@ -169,15 +212,15 @@ main {
   background: white;
   padding: 12px;
   border: 1px solid #ddd;
-}
 
-#panel input {
-  flex: 1 1 250px;
-  padding: 6px;
-}
+  input {
+    flex: 1 1 250px;
+    padding: 6px;
+  }
 
-#panel select {
-  padding: 6px;
+  select {
+    padding: 6px;
+  }
 }
 
 #timer {
@@ -200,33 +243,32 @@ main {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
 
-#boardControls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  #boardControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-#viewAs {
-  display: flex;
-  gap: 10px;
-}
+  #viewAs {
+    display: flex;
+    gap: 10px;
+  }
 
-/* pojedynczy wpis */
-#board > div:not(#boardControls) {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  > div:not(#boardControls) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-  padding: 10px;
-  background: #fafafa;
-  border: 1px solid #ccc;
-}
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+  }
 
-#board button[data-action] {
-  background: none;
-  border: none;
+  button[data-action] {
+    background: none;
+    border: none;
+  }
 }
 
 /* //////////////////////////////////////////////////// PROJECTS */
