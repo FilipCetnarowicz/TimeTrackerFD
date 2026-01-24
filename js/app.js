@@ -4,5 +4,9 @@ import { initRouter } from './router.js';
 import { initSidebar } from './sidebar.js';
 
 initRouter();
+<<<<<<< HEAD
 initUI(store);
 initSidebar();
+=======
+initUI(store);
+>>>>>>> refs/remotes/origin/main

@@ -1,5 +1,8 @@
 const storageKey = 'timeTrackerState';
+const taskEndpoint = '/task';
+const projectEndpoint = '/project';
 
+//store dla Taskow
 //store dla Taskow
 class Store {
     ///////////////////////////////////////////////////// variables
@@ -10,6 +13,8 @@ class Store {
         project: null,
         history: [],
     };
+
+    #stateProjects = [];
 
     #stateProjects = [
         {
@@ -36,26 +41,49 @@ class Store {
     }
 
     ///////////////////////////////////////////////////// localStorage
-    #loadState() {
+    async #loadState() {
         try {
-            const raw = localStorage.getItem(storageKey);
-            if (!raw) return;
-            const parsed = JSON.parse(raw);
-            if (parsed && Array.isArray(parsed.history)) {
-                this.#state = parsed;
+            // Fetch tasks and projects from the API
+            const [tasksResponse, projectsResponse] = await Promise.all([
+                fetch(taskEndpoint),
+                fetch(projectEndpoint)
+            ]);
+
+            if (!tasksResponse.ok || !projectsResponse.ok) {
+                throw new Error('Failed to fetch data from the server');
             }
-            // else {
-            //     this.#state = []; // tu by trzeba było podmienić na pusty wzór tabeli
-            // }
+
+            const tasks = await tasksResponse.json();
+            const projects = await projectsResponse.json();
+
+            // Update state with fetched data
+            this.#state.history = tasks;
+            this.#stateProjects = projects;
+
+            this.#notify();
         } catch (error) {
-            console.warn('localStorage loading error:', error);
+            console.error('Error loading state:', error);
         }
     }
-    #saveState() {
+    async #saveState() {
         try {
-            localStorage.setItem(storageKey, JSON.stringify(this.#state));
+            const response = await fetch(taskEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.#state),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to save task');
+            }
+
+            const savedTask = await response.json();
+            this.#state.history.push(savedTask);
+            this.#notify();
         } catch (error) {
-            console.warn('localStorage saving error:', error);
+            console.error('Error saving task:', error);
         }
     }
 
