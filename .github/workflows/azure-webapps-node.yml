@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - danielDev
   workflow_dispatch:
 
 env:
