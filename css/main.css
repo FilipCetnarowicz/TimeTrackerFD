@@ -198,6 +198,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  min-width: 0;
 }
 
 /* /////////////////////////////////////////////////////////////////////// HEADER TABS */
@@ -285,76 +287,214 @@ main section.headerTabs .tabContent {
     }
   }
 }
+/* //////////////////////////////////////////////////// ASIDE TABS */
 
-/* //////////////////////////////////////////////////// TASKS */
-
-/* /////////// PANEL */
-
-#panel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  background: white;
-  padding: 12px;
-  border: 1px solid #ddd;
-
-  input {
-    flex: 1 1 250px;
-    padding: 6px;
-  }
-
-  select {
-    padding: 6px;
-  }
+section[hidden] {
+  display: none !important;
 }
 
-#timer {
-  font-weight: bold;
-  min-width: 80px;
-  text-align: center;
+main section.sideTabs {
 }
 
-#btnStartStop.running {
-  color: red;
-}
+/* /////////// TASKS */
 
-/* /////////// BOARD */
-
-#board {
-  background: white;
-  border: 1px solid #ddd;
-  padding: 12px;
-
+section[data-switch='tasks'] {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 
-  #boardControls {
+  #panel {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  #viewAs {
-    display: flex;
-    gap: 10px;
-  }
-
-  > div:not(#boardControls) {
-    display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
 
-    padding: 10px;
-    background: #fafafa;
-    border: 1px solid #ccc;
+    background: #2c3e50;
+    padding: 12px;
+    /* border: 1px solid #ddd; */
+    border-radius: 6px;
+
+    input {
+      flex: 1 1 250px;
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    select {
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    button {
+      border-radius: 6px;
+    }
   }
 
-  button[data-action] {
-    background: none;
-    border: none;
+  #timer {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #ffffff;
+    /* border: 1px solid #cfd8ee; */
+
+    min-width: 96px;
+    text-align: center;
+  }
+
+  #btnStartStop {
+    border-radius: 6px;
+    &[data-state='running'] {
+      background: #ff0000;
+    }
+  }
+
+  #board {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    #boardControls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #viewAs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .entry {
+      display: flex;
+      /* align-items: center; */
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      white-space: wrap;
+
+      padding: 8px 10px;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      transition:
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+
+      button {
+        font-size: 13px;
+        background: none;
+        border: none;
+      }
+
+      button[data-action='delete'] {
+        color: #b00020;
+      }
+      button[data-action='changeTime'] {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      button[data-action='changeTask'] {
+        flex: 1 1 auto;
+        min-width: 0;
+
+        text-align: left;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      button[data-action='changeProject'] {
+        margin-left: auto;
+        white-space: nowrap;
+        opacity: 0.8;
+        padding-right: 2vw;
+      }
+
+      button[data-action='continue'],
+      button[data-action='delete'],
+      button[data-action='split'] {
+        margin-left: 6px;
+      }
+    }
   }
 }
 
-/* //////////////////////////////////////////////////// PROJECTS */
+/* /////////// PROJECTS */
+
+section[data-switch='projects'] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .projectsPanel {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 6px;
+    }
+  }
+
+  .projectsForm {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    select {
+      padding: 6px;
+      min-width: 220px;
+    }
+  }
+
+  .projectActions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      background: #f4f6fb;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      padding: 6px 10px;
+
+      &:hover {
+        background: #e6ebf5;
+      }
+    }
+  }
+
+  .projectDetails {
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+}
+
+/* ///////////////// */
+
+@media (max-width: 600px) {
+  main {
+    overflow-x: auto;
+  }
+}

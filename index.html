@@ -57,10 +57,7 @@
           </select>
 
           <button id="btnStartStop" data-state="stopped">▶</button>
-          <!-- <button id="btnStop">⏸</button> -->
-          <!-- po kliknięciu ▶ przycisk zamienia się na czerwony ⏸ -->
           <span id="timer">00:00:00</span>
-          <!-- po kliknięciu w czas można zmienić godzinę rozpoczęcia -->
         </div>
 
         <div id="board">
@@ -85,18 +82,33 @@
       </section>
 
       <section class="sideTabs" data-switch="projects" hidden>
-        <h2>Projects</h2>
+        <!-- <h2>Projects</h2>
         <label for="projectDropdown">Select a Project:</label>
         <select id="projectDropdown">
           <option value="" disabled selected>Select a project</option>
-          <!-- Add project options dynamically here -->
         </select>
         <div id="projectDetails">
-          <!-- Project details will be displayed here after selection -->
         </div>
         <button id="addProjectButton">Add Project</button>
         <button id="editProjectButton">Edit Project</button>
-        <button id="deleteProjectButton">Delete Project</button>
+        <button id="deleteProjectButton">Delete Project</button> -->
+        <div class="projectsPanel">
+          <h2>Projects</h2>
+
+          <div class="projectsForm">
+            <select id="projectDropdown">
+              <option value="" disabled selected>Select a project</option>
+            </select>
+
+            <div class="projectActions">
+              <button id="addProjectButton">＋ Add</button>
+              <button id="editProjectButton">✎ Edit</button>
+              <button id="deleteProjectButton">✖ Delete</button>
+            </div>
+          </div>
+
+          <div id="projectDetails" class="projectDetails"></div>
+        </div>
       </section>
 
       <section class="sideTabs" data-switch="reports" hidden>reports</section>
