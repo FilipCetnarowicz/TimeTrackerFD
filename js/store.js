@@ -1,8 +1,5 @@
 const storageKey = 'timeTrackerState';
-const taskEndpoint = '/task';
-const projectEndpoint = '/project';
 
-//store dla Taskow
 //store dla Taskow
 class Store {
     ///////////////////////////////////////////////////// variables
@@ -13,8 +10,6 @@ class Store {
         project: null,
         history: [],
     };
-
-    #stateProjects = [];
 
     #stateProjects = [
         {
@@ -41,49 +36,26 @@ class Store {
     }
 
     ///////////////////////////////////////////////////// localStorage
-    async #loadState() {
+    #loadState() {
         try {
-            // Fetch tasks and projects from the API
-            const [tasksResponse, projectsResponse] = await Promise.all([
-                fetch(taskEndpoint),
-                fetch(projectEndpoint)
-            ]);
-
-            if (!tasksResponse.ok || !projectsResponse.ok) {
-                throw new Error('Failed to fetch data from the server');
+            const raw = localStorage.getItem(storageKey);
+            if (!raw) return;
+            const parsed = JSON.parse(raw);
+            if (parsed && Array.isArray(parsed.history)) {
+                this.#state = parsed;
             }
-
-            const tasks = await tasksResponse.json();
-            const projects = await projectsResponse.json();
-
-            // Update state with fetched data
-            this.#state.history = tasks;
-            this.#stateProjects = projects;
-
-            this.#notify();
+            // else {
+            //     this.#state = []; // tu by trzeba było podmienić na pusty wzór tabeli
+            // }
         } catch (error) {
-            console.error('Error loading state:', error);
+            console.warn('localStorage loading error:', error);
         }
     }
-    async #saveState() {
+    #saveState() {
         try {
-            const response = await fetch(taskEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.#state),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to save task');
-            }
-
-            const savedTask = await response.json();
-            this.#state.history.push(savedTask);
-            this.#notify();
+            localStorage.setItem(storageKey, JSON.stringify(this.#state));
         } catch (error) {
-            console.error('Error saving task:', error);
+            console.warn('localStorage saving error:', error);
         }
     }
 
