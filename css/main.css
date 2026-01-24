@@ -189,7 +189,7 @@ footer {
   }
 }
 
-/* /////////////////////////////////////////////////////////////////////// MAIN CONTENT (SPA CONTAINER) */
+/* /////////////////////////////////////////////////////////////////////// MAIN CONTENT */
 
 main {
   grid-area: content;
@@ -198,6 +198,92 @@ main {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+/* /////////////////////////////////////////////////////////////////////// HEADER TABS */
+
+main section.headerTabs {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 16px;
+}
+
+main section.headerTabs h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+main section.headerTabs .tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 33%;
+  min-width: 280px;
+  max-width: 50%;
+
+  .settingRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 14px;
+    background: white;
+    border-bottom: 1px solid #eee;
+
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f4f6fb;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #222;
+    }
+
+    .value {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .value.link {
+      color: #3d6d9e;
+      font-weight: 500;
+    }
+
+    &.disabled {
+      cursor: default;
+
+      &:hover {
+        background: #fafafa;
+      }
+
+      .label {
+        color: #777;
+      }
+
+      .value {
+        color: #999;
+      }
+    }
+  }
 }
 
 /* //////////////////////////////////////////////////// TASKS */

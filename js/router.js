@@ -4,7 +4,7 @@ export function initRouter() {
     sections = document.querySelectorAll('section[data-switch]');
 
     document.addEventListener('click', (e) => {
-        const trigger = e.target.closest('button[data-switch]');
+        const trigger = e.target.closest('[data-switch]');
         if (!trigger) return;
 
         show(trigger.dataset.switch);

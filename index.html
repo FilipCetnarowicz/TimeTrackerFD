@@ -8,8 +8,6 @@
     <script type="module" src="./js/app.js"></script>
   </head>
   <body>
-
-    
     <div id="loginContainer" hidden>
       <h1>Welcome to TimeTrackerFD</h1>
       <form id="loginForm">
@@ -22,7 +20,6 @@
         <button type="submit">Login</button>
       </form>
     </div>
-
 
     <aside>
       <button id="asideToggle">hide/show</button>
@@ -47,11 +44,7 @@
     </header>
 
     <main>
-<<<<<<< HEAD
       <section class="sideTabs" data-switch="tasks">
-=======
-      <section data-switch="tasks" hidden>
->>>>>>> refs/remotes/origin/main
         <div id="panel">
           <input
             id="inputTask"
@@ -109,23 +102,119 @@
       <section class="sideTabs" data-switch="reports" hidden>reports</section>
       <section class="sideTabs" data-switch="tags" hidden>tags</section>
       <section class="sideTabs" data-switch="team" hidden>team</section>
-      <section class="headerTabs" data-switch="about" hidden>about</section>
-      <section class="headerTabs" data-switch="help" hidden>help</section>
-      <section class="headerTabs" data-switch="settings" hidden>
-        settings
+      <section class="headerTabs" data-switch="about" hidden>
+        <h2>About</h2>
+        <div class="tabContent">
+          <p>
+            <strong>TimeTrackerFD</strong> is a single-page application designed
+            to track work time in small teams.
+          </p>
+
+          <p>
+            It is built using <strong>vanilla JavaScript, HTML and CSS</strong>,
+            with a modular JavaScript architecture and no external frameworks.
+          </p>
+
+          <p>
+            The application works on both desktop and mobile devices and is
+            developed as part of the <strong>PP5 university project</strong>.
+          </p>
+
+          <p>
+            TimeTrackerFD is a
+            <strong>free alternative to paid time tracking tools</strong>,
+            focused on simplicity, transparency and ease of use.
+          </p>
+
+          <p>
+            The project was designed and implemented by
+            <strong>Daniel Jakubas</strong> and
+            <strong>Filip Cetnarowicz</strong>, and is deployed on
+            <strong>Microsoft Azure</strong>.
+          </p>
+        </div>
       </section>
-      <section class="headerTabs" data-switch="account" hidden>account</section>
+      <section class="headerTabs" data-switch="help" hidden>
+        <h2>Help</h2>
+        <div class="tabContent">
+          <p>If you need help or want to report an issue, contact:</p>
+          <p><strong>contact@timetrackerfd.com</strong></p>
+          <ul>
+            <p>TimeTrackerFD provides only the following core features:</p>
+            <br />
+            <p><strong>Tasks</strong> – create activities and track time.</p>
+            <p><strong>Projects</strong> – assign tasks to projects.</p>
+            <p><strong>Reports</strong> – review tracked time.</p>
+            <p><strong>Tags</strong> – organize work using labels.</p>
+            <p>
+              <strong>Team</strong> – see team members, who are assigned to your
+              team.
+            </p>
+          </ul>
+          <p>
+            The application is actively developed, and new features are added
+            over time. You can send feature requests to our contact email.
+          </p>
+        </div>
+      </section>
+      <section class="headerTabs" data-switch="settings" hidden>
+        <h2>Settings</h2>
+        <br />
+        <div class="tabContent settingsList">
+          <div class="settingRow" data-switch="account">
+            <span class="label">Account</span>
+            <span class="value link">modify</span>
+          </div>
+
+          <div class="settingRow disabled">
+            <span class="label">Night theme</span>
+            <span class="value"><strong>COMING SOON</strong></span>
+          </div>
+
+          <div class="settingRow disabled">
+            <span class="label">Language</span>
+            <span class="value"><strong>COMING SOON</strong></span>
+          </div>
+        </div>
+        <br />
+      </section>
+      <section class="headerTabs" data-switch="account" hidden>
+        <h2>Account</h2>
+        <br />
+        <div class="tabContent settingsList">
+          <div class="settingRow">
+            <span class="label">User name</span>
+            <span class="value">Filip Cetnarowicz</span>
+          </div>
+
+          <div class="settingRow">
+            <span class="label">Email</span>
+            <span class="value">filipcetnarowicz@private.com</span>
+          </div>
+
+          <div class="settingRow">
+            <span class="label">Role</span>
+            <span class="value">Team member</span>
+          </div>
+
+          <div class="settingRow disabled">
+            <span class="label">Change password</span>
+            <span class="value"><strong>COMING SOON</strong></span>
+          </div>
+
+          <div class="settingRow disabled">
+            <span class="label">Delete account</span>
+            <span class="value"><strong>COMING SOON</strong></span>
+          </div>
+        </div>
+        <br />
+      </section>
     </main>
-
-
-  </div>
     <footer hidden>
       <span>© 2026 TimeTracker by Filip Cetnarowicz & Daniel Jakubas</span>
       <address class="contact">
         ✉ <a href="mailto:contact@timetracker.com">contact@timetrackerfd.com</a>
       </address>
     </footer>
-
-
   </body>
 </html>
